@@ -481,3 +481,20 @@ def map_events(map_name: str):
 @app.get("/debug-file-paths/{match_id}")
 def debug_file_paths(match_id: str):
     return get_file_paths(match_id)
+
+@app.get("/debug-file-exists/{match_id}")
+def debug_file_exists(match_id: str):
+
+    import os
+
+    paths = get_file_paths(match_id)
+
+    result = []
+
+    for path in paths:
+        result.append({
+            "path": path,
+            "exists": os.path.exists(path)
+        })
+
+    return result
