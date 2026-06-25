@@ -489,12 +489,7 @@ def debug_file_exists(match_id: str):
 
     paths = get_file_paths(match_id)
 
-    result = []
-
-    for path in paths:
-        result.append({
-            "path": path,
-            "exists": os.path.exists(path)
-        })
-
-    return result
+    return {
+        "paths": paths,
+        "exists": [os.path.exists(p) for p in paths]
+    }
