@@ -8,11 +8,11 @@ A web-based visualization tool developed to help Level Designers analyze player 
 
 **Frontend (Vercel)**
 
-> https://YOUR-VERCEL-URL.vercel.app
+> https://lila-player-tool-murex.vercel.app/
 
 **Backend API (Railway)**
 
-> https://YOUR-RAILWAY-URL.up.railway.app
+> https://lila-player-tool-production.up.railway.app/
 
 ---
 
