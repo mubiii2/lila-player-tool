@@ -54,7 +54,15 @@ def get_file_path(match_id):
     if row.empty:
         return None
 
-    return row.iloc[0]["file_path"]
+    import os
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+    relative_path = row.iloc[0]["file_path"]
+
+    return os.path.normpath(
+        os.path.join(BASE_DIR, "..", relative_path)
+    )
 
 
 def get_file_paths(match_id):
@@ -66,7 +74,16 @@ def get_file_paths(match_id):
     if rows.empty:
         return []
 
-    return rows["file_path"].tolist()
+        paths = []
+
+        for relative_path in rows["file_path"]:
+            paths.append(
+                os.path.normpath(
+                    os.path.join(BASE_DIR, "..", relative_path)
+                )
+            )
+
+        return paths
 
 
 @app.get("/")
