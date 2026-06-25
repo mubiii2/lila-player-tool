@@ -1,4 +1,5 @@
 ﻿import { useEffect, useRef, useCallback, useState } from "react";
+const API_URL = "https://lila-player-tool-production.up.railway.app";
 
 function App() {
   const [points, setPoints] = useState([]);
@@ -61,7 +62,7 @@ useEffect(() => {
 }, [isPlaying, playbackSpeed]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/matches")
+    fetch(`${API_URL}/matches`)
       .then((res) => res.json())
       .then((data) => {
         setMatches(data);
@@ -82,7 +83,7 @@ useEffect(() => {
     setSelectedPlayer("All");
     setIsLoadingEvents(true);
 
-    fetch(`http://127.0.0.1:8000/journey/${selectedMatch}`)
+    fetch(`${API_URL}/journey/${selectedMatch}`)
   .then((res) => res.json())
   .then((data) => {
   
@@ -90,20 +91,18 @@ useEffect(() => {
   });
   
 
-    fetch(`http://127.0.0.1:8000/events/${selectedMatch}`)
+    fetch(`${API_URL}/events/${selectedMatch}`)
       .then((res) => res.json())
       .then((data) => {
         setEvents(data);
         setIsLoadingEvents(false);
       });
 
-    fetch(`http://127.0.0.1:8000/match-info/${selectedMatch}`)
+    fetch(`${API_URL}/match-info/${selectedMatch}`)
       .then((res) => res.json())
       .then((data) => setMatchInfo(data));
 
-    fetch(
-  `http://127.0.0.1:8000/players/${selectedMatch}`
-)
+    fetch(`${API_URL}/players/${selectedMatch}`)
   .then((res) => res.json())
   .then((data) => {
   setPlayers(data);
@@ -147,7 +146,7 @@ useEffect(() => {
   if (heatmapScope !== "map" || !matchInfo?.map_id) return;
 
   setIsLoadingMapEvents(true);
-  fetch(`http://127.0.0.1:8000/map-events/${matchInfo.map_id}`)
+  fetch(`${API_URL}/map-events/${matchInfo.map_id}`)
     .then((res) => res.json())
     .then((data) => {
       setMapEvents(data);
