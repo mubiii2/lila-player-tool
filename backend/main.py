@@ -58,8 +58,12 @@ def get_file_path(match_id):
 
     relative_path = row.iloc[0]["file_path"]
 
-    return os.path.normpath(
-        os.path.join(BASE_DIR, "..", relative_path)
+    return os.path.join(
+        BASE_DIR,
+        "..",
+        "player_data",
+        "player_data",
+        relative_path
     )
 
 
@@ -76,8 +80,12 @@ def get_file_paths(match_id):
 
     for relative_path in rows["file_path"]:
         paths.append(
-            os.path.normpath(
-                os.path.join(BASE_DIR, "..", relative_path)
+            os.path.join(
+                BASE_DIR,
+                "..",
+                "player_data",
+                "player_data",
+                relative_path
             )
         )
 

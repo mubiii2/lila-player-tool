@@ -20,7 +20,10 @@ for folder, _, files in os.walk(ROOT):
 
             rows.append({
                 "match_id": str(df.iloc[0]["match_id"]),
-                "file_path": os.path.relpath(path, start=os.getcwd()),
+                "file_path": os.path.relpath(
+                    path,
+                    ROOT
+                ).replace("\\", "/"),
                 "map_id": str(df.iloc[0]["map_id"])
             })
 
