@@ -493,3 +493,17 @@ def debug_file_exists(match_id: str):
         "paths": paths,
         "exists": [os.path.exists(p) for p in paths]
     }
+
+@app.get("/debug-files")
+def debug_files():
+    import os
+
+    result = {}
+
+    for folder in ["/app", "/app/backend", "/app/player_data"]:
+        if os.path.exists(folder):
+            result[folder] = os.listdir(folder)
+        else:
+            result[folder] = "NOT FOUND"
+
+    return result
