@@ -2,7 +2,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from data_loader import load_player_file
 import pandas as pd
+import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app = FastAPI()
 
 app.add_middleware(
@@ -54,10 +56,6 @@ def get_file_path(match_id):
     if row.empty:
         return None
 
-    import os
-
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
     relative_path = row.iloc[0]["file_path"]
 
     return os.path.normpath(
@@ -74,17 +72,16 @@ def get_file_paths(match_id):
     if rows.empty:
         return []
 
-        paths = []
+    paths = []
 
-        for relative_path in rows["file_path"]:
-            paths.append(
-                os.path.normpath(
-                    os.path.join(BASE_DIR, "..", relative_path)
-                )
+    for relative_path in rows["file_path"]:
+        paths.append(
+            os.path.normpath(
+                os.path.join(BASE_DIR, "..", relative_path)
             )
+        )
 
-        return paths
-
+    return paths
 
 @app.get("/")
 def home():
@@ -472,3 +469,7 @@ def map_events(map_name: str):
             })
 
     return all_markers
+
+@app.get("/debug-file-paths/{match_id}")
+def debug_file_paths(match_id: str):
+    return get_file_paths(match_id)
