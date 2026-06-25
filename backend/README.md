@@ -16,6 +16,10 @@ A web-based visualization tool developed to help Level Designers analyze player 
 
 ---
 
+## GitHub Repository
+
+>https://github.com/mubiii2/lila-player-tool
+
 # Features
 
 ## Core Features
@@ -102,7 +106,7 @@ LILA-Player-Tool/
 ## Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/mubiii2/lila-player-tool.git
 cd lila-player-tool
 ```
 
@@ -177,7 +181,7 @@ VITE_API_URL=http://localhost:8000
 For production:
 
 ```env
-VITE_API_URL=https://YOUR-RAILWAY-URL.up.railway.app
+VITE_API_URL=https://lila-player-tool-production.up.railway.app
 ```
 
 ---
