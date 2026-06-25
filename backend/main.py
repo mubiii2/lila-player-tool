@@ -56,14 +56,11 @@ def get_file_path(match_id):
     if row.empty:
         return None
 
-    relative_path = row.iloc[0]["file_path"]
-
     return os.path.join(
         BASE_DIR,
-        "..",
         "player_data",
         "player_data",
-        relative_path
+        row.iloc[0]["file_path"]
     )
 
 
@@ -82,7 +79,6 @@ def get_file_paths(match_id):
         paths.append(
             os.path.join(
                 BASE_DIR,
-                "..",
                 "player_data",
                 "player_data",
                 relative_path
